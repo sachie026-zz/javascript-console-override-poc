@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>
+            POC
+        </title>
+    </head>
+    <body>
+        POC: Override console functions
+    </body>
+    <script>
+        // define a new console
+        var console=(function(oldCons){
+            return {
+                log: function(text){
+                    oldCons.log("Override")
+                    oldCons.log(text);
+                },
+                info: function (text) {
+                    oldCons.log("Override")
+                    oldCons.info(text);
+                },
+                warn: function (text) {
+                    oldCons.log("Override")
+                    oldCons.warn(text);
+                },
+                error: function (text) {
+                    oldCons.log("Override")
+                    oldCons.error(text);
+                }
+            };
+        }(window.console));
+
+        //Then redefine the old console
+        window.console = console;
+
+        //Test
+        console.log("Log")
+        console.error("Error")
+    </script>
+</html>
